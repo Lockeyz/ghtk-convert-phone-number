@@ -1,13 +1,12 @@
 package com.example.ghtk_convert_phone_number
 
-import android.util.Log
 import android.view.LayoutInflater
 import android.view.ViewGroup
 import androidx.recyclerview.widget.RecyclerView
 import com.example.ghtk_convert_phone_number.databinding.ItemPhoneNumberBinding
 
 class PhoneNumberAdapter(
-    private val phoneNumbers: MutableList<PhoneNumber>,
+    private val contacts: MutableList<Contact>,
     private val onItemClickListener: OnItemClickListener
 ) :
     RecyclerView.Adapter<PhoneNumberAdapter.PhoneNumberViewHolder>() {
@@ -26,14 +25,13 @@ class PhoneNumberAdapter(
     }
 
     override fun onBindViewHolder(holder: PhoneNumberViewHolder, position: Int) {
-//        val phoneNumber = phoneNumbers[position]
 
-        holder.binding.txtPhoneNumber.text = phoneNumbers[position].number
-
-        holder.binding.checkbox.isChecked = phoneNumbers[position].isSelected
+        holder.binding.tvName.text = contacts[position].name
+        holder.binding.tvPhoneNumber.text = contacts[position].number
+        holder.binding.checkbox.isChecked = contacts[position].isSelected
 
         holder.binding.checkbox.setOnCheckedChangeListener { _, isChecked ->
-            phoneNumbers[position].isSelected = isChecked
+            contacts[position].isSelected = isChecked
         }
 
         holder.binding.btnEdit.setOnClickListener {
@@ -43,37 +41,37 @@ class PhoneNumberAdapter(
 
         holder.binding.btnDelete.setOnClickListener {
             onItemClickListener.onDeleteClick(position)
-//            phoneNumbers.removeAt(position)
+            contacts.removeAt(position)
             notifyItemChanged(position)
         }
 
     }
 
-//    override fun onBindViewHolder(
-//        holder: PhoneNumberViewHolder,
-//        position: Int,
-//        payloads: List<Any>
-//    ) {
-//        if (payloads.isNotEmpty()) {
-//            for (payload in payloads) {
-//                when (payload) {
-////                    "Contact Edited" -> {
-////
-////                    }
-//                    "Contact Deleted" -> {
+    override fun onBindViewHolder(
+        holder: PhoneNumberViewHolder,
+        position: Int,
+        payloads: List<Any>
+    ) {
+        if (payloads.isNotEmpty()) {
+            for (payload in payloads) {
+                when (payload) {
+//                    "Contact Edited" -> {
 //
 //                    }
-//                }
-//            }
-//        } else {
-//            onBindViewHolder(holder, position)
-//        }
-//    }
+                    "Contact Deleted" -> {
 
-    override fun getItemCount(): Int = phoneNumbers.size
+                    }
+                }
+            }
+        } else {
+            onBindViewHolder(holder, position)
+        }
+    }
 
-    fun getSelectedPhoneNumbers(): List<PhoneNumber> {
-        return phoneNumbers.filter { it.isSelected }
+    override fun getItemCount(): Int = contacts.size
+
+    fun getSelectedPhoneNumbers(): List<Contact> {
+        return contacts.filter { it.isSelected }
     }
 
 

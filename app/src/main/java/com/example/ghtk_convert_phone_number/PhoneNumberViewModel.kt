@@ -4,6 +4,6 @@ import androidx.lifecycle.ViewModel
 
 class PhoneNumberViewModel: ViewModel() {
 
-    private var phoneNumbers = mutableListOf<PhoneNumber>()
-    val selectedPhoneNumbers = mutableListOf<PhoneNumber>()
+    private var contacts = mutableListOf<Contact>()
+    val selectedContacts = mutableListOf<Contact>()
 }

@@ -1,8 +1,9 @@
 package com.example.ghtk_convert_phone_number
 
-data class PhoneNumber(
+data class Contact(
     val id: Long,
-    val contactId: Long = 0,
+    val contactId: Long,
+    val name: String,
     val number: String,
     var isSelected: Boolean = false
 )
